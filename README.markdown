@@ -63,12 +63,23 @@ Any pages added to /content/protected-pages will require a login.
 Advanced Stuff
 =================
 If you prefer to place you content in a location other than 'RAILS_ROOT/content/pages' you can add a new 
-path to CMS lite using:
+path to CMS lite by adding a method 'setup_cms_lite' to your application_controller:
 
+Example:
+- - -
+    def setup_cms_lite
+      # this will be called by the cms lite plugin
+      prepend_cms_lite_path(File.join(RAILS_ROOT, 'content', 'help'))
+    end
+
+This will tell cms lite to look for a pages and protected-pages directory in /content/help/
+
+More
+- - -
+Paths are searched in order.
+Add the path to the beginning of the array:
     prepend_cms_lite_path(path)
-
-Or
-
+Add the path to the end of the array:
     append_cms_lite_path(path)
 
 
