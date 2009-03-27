@@ -22,7 +22,8 @@ Default routes:
     map.connect '/content/*content_page', :controller => 'cmslite', :action => 'show_page'
     map.protected_page '/protected/*content_page', :controller => 'cmslite', :action => 'show_protected_page'
 
-*b Example:
+Example:
+- - -
     Place test_me.html into /content/pages/test_me.html
     Visit
     http: http://localhost:3000/content/test_me
@@ -42,12 +43,13 @@ Add a custom route like this:
     map.help '/help/*content_page', :controller => 'cmslite', :action => 'show_page'
 
 
-*b Example:
+Example:
+- - -
     Place help_me.html into /content/pages/help_me.html
     Visit
     http: http://localhost:3000/help/help_me
 
-*b Note that you can use custom routes instead of the default routes if you prefer to not place your content 
+*Note* you can use custom routes instead of the default routes if you prefer to not place your content 
 under the '/content' url path.  You would still place your pages into 'RAILS_ROOT/content/pages'.
 
       
