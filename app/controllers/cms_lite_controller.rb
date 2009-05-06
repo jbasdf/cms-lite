@@ -29,16 +29,17 @@ class CmsLiteController < ApplicationController
   private
 
   def render_page(page_path, url_key, request_layout)
-    content_page = ''
+    content_page = nil
+    path = ''
     cms_lite_paths.each do |base_path|
-      path = File.join(base_path, page_path, url_key)    
+      path = File.join(base_path, page_path, I18n.locale.to_s, url_key)  
       content_page = Dir.glob("/#{path}.*").first
       break if content_page
     end
     raise CmsLiteExceptions::MissingTemplateError, "Could not find template for: '#{path}'" if content_page.nil?
     render :file => content_page, :layout => request_layout || true
   rescue CmsLiteExceptions::MissingTemplateError => ex
-    render :file => "#{RAILS_ROOT}/public/404.html.haml", :status => 404
+    render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
   end
   
 end
