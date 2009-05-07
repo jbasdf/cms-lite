@@ -38,5 +38,13 @@ Advanced Stuff
 The CMS Lite engine can display localization content.  To add spanish simply add an 'es' directory next to the 'en' directory
 and then copy your content pages to that directory.
 
+Handy Rake Tasks
+------------------
+CMS Lite comes with rake tasks that can help you manage your project.  These include the ability to send all files from one language
+to google for translation into 24 other languages.  To gain access to these tasks simple add the following lines to Rakefile:
+
+  require 'cms_lite'
+  require 'cms_lite/tasks'
+
 
 Copyright (c) 2009 Justin Ball, released under the MIT license

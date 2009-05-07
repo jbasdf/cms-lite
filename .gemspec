@@ -1,14 +1,11 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{cms_lite}
-  s.version = "0.2.7"
+  s.name = nil
+  s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Justin Ball"]
   s.date = %q{2009-05-07}
-  s.description = %q{CMS gem that makes it simple to interact with your content developers by serving pages from '/content'.}
-  s.email = %q{justinball@gmail.com}
   s.extra_rdoc_files = [
     "README.markdown"
   ]
@@ -21,9 +18,6 @@ Gem::Specification.new do |s|
      "cms_lite.gemspec",
      "config/cms_lite_routes.rb",
      "lib/cms_lite.rb",
-     "lib/cms_lite/exceptions.rb",
-     "lib/cms_lite/initialize_routes.rb",
-     "lib/cms_lite/tasks.rb",
      "pkg/cms_lite-0.1.1.gem",
      "rails/init.rb",
      "tasks/rails.rake",
@@ -32,11 +26,10 @@ Gem::Specification.new do |s|
      "uninstall.rb"
   ]
   s.has_rdoc = true
-  s.homepage = %q{http://github.com/jbasdf/cms_lite}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
-  s.summary = %q{Simple CMS system}
+  s.summary = nil
   s.test_files = [
     "test/cms_lite_test.rb",
      "test/test_helper.rb"
