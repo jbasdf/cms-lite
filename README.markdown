@@ -27,7 +27,7 @@ Example:
       
 The Basics
 =================
-The cms lite engine provides basic template rendering functionality.  
+The cms lite plugin provides basic template rendering functionality.  
 Any templates added to /content/pages will be publicly visible.  
 Any pages added to /content/protected-pages will require a login.
 CMS lite will use the layout specified in application_controller.rb
