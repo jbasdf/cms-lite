@@ -1,61 +1,51 @@
---- !ruby/object:Gem::Specification 
-name: cms_lite
-version: !ruby/object:Gem::Version 
-  version: 0.1.0
-platform: ruby
-authors: 
-- Justin Ball
-autorequire: 
-bindir: bin
-cert_chain: []
+# -*- encoding: utf-8 -*-
 
-date: 2009-05-06 00:00:00 -06:00
-default_executable: 
-dependencies: []
+Gem::Specification.new do |s|
+  s.name = %q{cms_lite}
+  s.version = "0.1.1"
 
-description: CMS gem that makes it simple to interact with your content developers by serving pages from '/content'.
-email: support@example.com
-executables: []
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.authors = ["Justin Ball"]
+  s.date = %q{2009-05-06}
+  s.description = %q{CMS gem that makes it simple to interact with your content developers by serving pages from '/content'.}
+  s.email = %q{justinball@gmail.com.com}
+  s.extra_rdoc_files = [
+    "README.markdown"
+  ]
+  s.files = [
+    "MIT-LICENSE",
+     "README.markdown",
+     "Rakefile",
+     "VERSION",
+     "app/controllers/cms_lite_controller.rb",
+     "cms_lite.gemspec",
+     "config/cms_lite_routes.rb",
+     "lib/cms_lite.rb",
+     "lib/cms_lite_exceptions.rb",
+     "rails/init.rb",
+     "tasks/cms_lite_tasks.rake",
+     "test/cms_lite_test.rb",
+     "test/test_helper.rb",
+     "uninstall.rb"
+  ]
+  s.has_rdoc = true
+  s.homepage = %q{http://github.com/jbasdf/cms_lite}
+  s.rdoc_options = ["--charset=UTF-8"]
+  s.require_paths = ["lib"]
+  s.rubygems_version = %q{1.3.1}
+  s.summary = %q{Simple CMS system}
+  s.test_files = [
+    "test/cms_lite_test.rb",
+     "test/test_helper.rb"
+  ]
 
-extensions: []
+  if s.respond_to? :specification_version then
+    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
+    s.specification_version = 2
 
-extra_rdoc_files: []
-
-files: 
-- MIT-LICENSE
-- Rakefile
-- README.markdown
-- app/controllers
-- app/controllers/cms_lite_controller.rb
-- config/cms_lite_routes.rb
-- lib/cms_lite.rb
-- lib/cms_lite_exceptions.rb
-- rails/init.rb
-has_rdoc: false
-homepage: http://github.com/jbasdf/cms_lite
-post_install_message: 
-rdoc_options: []
-
-require_paths: 
-- lib
-required_ruby_version: !ruby/object:Gem::Requirement 
-  requirements: 
-  - - ">="
-    - !ruby/object:Gem::Version 
-      version: "0"
-  version: 
-required_rubygems_version: !ruby/object:Gem::Requirement 
-  requirements: 
-  - - ">="
-    - !ruby/object:Gem::Version 
-      version: "0"
-  version: 
-requirements: []
-
-rubyforge_project: 
-rubygems_version: 1.3.1
-signing_key: 
-specification_version: 2
-summary: Simple CMS system
-test_files: []
-
+    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    else
+    end
+  else
+  end
+end
