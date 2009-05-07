@@ -3,84 +3,40 @@ CMS Lite Engine
 CMS Lite makes it simple to add lots of content to your rails application without having to add a full CMS system.  Frequently,
 the parties involved in developing your website will have enough technical knowledge to be able to build html pages and add 
 content, but not be experienced enough to build out new controllers and deal with rendering the appropriate templates.  CMS Lite 
-addresses this need by centralizing all content into a 'content' subdirectory (you can also add other paths).  Tell
-your content developers to put their code into /content/pages or /content/protected-page (for content that requires a login) 
+addresses this need by centralizing all content into a 'content' subdirectory.  Tell
+your content developers to put their code into /content/pages/en or /content/protected-page/en (for content that requires a login) 
 and you're ready to go.
 
 Installation
 =================
-Get the plugin:
+Install the gem:
 
 CMS Lite Requires a login method called 'login_required' that will be called in the event the user is not logged in and 
 attempts to load a protected page.
 
-Setup your routes:
+Routes:
 ------------------
-
-Default routes:
-------------------
-    map.connect '/content/*content_page', :controller => 'cmslite', :action => 'show_page'
-    map.protected_page '/protected/*content_page', :controller => 'cmslite', :action => 'show_protected_page'
-
+ CMS Lite will add a route for each subdirectory found under /content/pages/en.
+ 
+ 
 Example:
 - - -
-    Place test_me.html into /content/pages/test_me.html
+    Place test_me.html into /content/pages/en/cms/test_me.html
     Visit
-    http: http://localhost:3000/content/test_me
-
-Root route:
-------------------
-You can render pages directly off the root of the website by adding the following route:
-
-    map.content "/*content_page", :controller => "cmslite", :action => "show_page"
-
-Note that this route should be placed at the bottom of your routes file.  It will override the default Rails
-routes so use it with caution.
-
-Custom routes:
-------------------
-Add a custom route like this:
-    map.help '/help/*content_page', :controller => 'cmslite', :action => 'show_page'
-
-
-Example:
-- - -
-    Place help_me.html into /content/pages/help_me.html
-    Visit
-    http: http://localhost:3000/help/help_me
-
-*Note* you can use custom routes instead of the default routes if you prefer to not place your content 
-under the '/content' url path.  You would still place your pages into 'RAILS_ROOT/content/pages'.
-
+    http: http://localhost:3000/cms/test_me
       
 The Basics
 =================
 The cms lite engine provides basic template rendering functionality.  
 Any templates added to /content/pages will be publicly visible.  
 Any pages added to /content/protected-pages will require a login.
+CMS lite will use the layout specified in application_controller.rb
 
 
 Advanced Stuff
 =================
-If you prefer to place you content in a location other than 'RAILS_ROOT/content/pages' you can add a new 
-path to CMS lite by adding a method 'setup_cms_lite' to your application_controller:
-
-Example:
-- - -
-    def setup_cms_lite
-      # this will be called by the cms lite plugin
-      prepend_cms_lite_path(File.join(RAILS_ROOT, 'content', 'help'))
-    end
-
-This will tell cms lite to look for a pages and protected-pages directory in /content/help/
-
-More
-- - -
-Paths are searched in order.
-Add the path to the beginning of the array:
-    prepend_cms_lite_path(path)
-Add the path to the end of the array:
-    append_cms_lite_path(path)
+The CMS Lite engine can display localization content.  To add spanish simply add an 'es' directory next to the 'en' directory
+and then copy your content pages to that directory.
 
 
 Copyright (c) 2009 Justin Ball, released under the MIT license
