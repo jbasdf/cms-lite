@@ -2,42 +2,23 @@ class CmsLiteController < ApplicationController
 
   before_filter :login_required, :only => [:show_protected_page]
 
-  PAGES_PATH = 'pages'
-  PROTECTED_PAGES_PATH = 'protected-pages'
-  
   def show_page
-    respond_to do |format|
-      format.html {render_content_page(PAGES_PATH, true)}
-      format.js {render_content_page(PAGES_PATH, "blank")}
-      format.xml {render_content_page(PAGES_PATH, false)}
-    end
+    render_content_page(CmsLite::CMS_LITE_PAGES_PATH)
   end
-
+  
   def show_protected_page
-    respond_to do |format|
-      format.html {render_content_page(PROTECTED_PAGES_PATH, true)}
-      format.js {render_content_page(PROTECTED_PAGES_PATH, "blank")}
-      format.xml {render_content_page(PROTECTED_PAGES_PATH, false)}
-    end
+    render_content_page(CmsLite::CMS_LITE_PROTECTED_PAGES_PATH)
   end
-
-  protected
-  def render_content_page(page_path, request_layout)
-    render_page(page_path, params[:content_page].join('/'), request_layout)
-  end
-
-  private
-
-  def render_page(page_path, url_key, request_layout)
-    content_page = nil
-    path = ''
-    cms_lite_paths.each do |base_path|
-      path = File.join(base_path, page_path, I18n.locale.to_s, url_key)  
-      content_page = Dir.glob("/#{path}.*").first
-      break if content_page
-    end
+  
+  def render_content_page(cms_lite_path, request_layout = '')
+    path = File.join(RAILS_ROOT, CmsLite::CMS_LITE_CONTENT_PATH, cms_lite_path, I18n.locale.to_s, params[:content_key], params[:content_page].join('/'))
+    content_page = Dir.glob("/#{path}.*").first
     raise CmsLiteExceptions::MissingTemplateError, "Could not find template for: '#{path}'" if content_page.nil?
-    render :file => content_page, :layout => request_layout || true
+    respond_to do |format|
+      format.html { render :file => content_page }
+      format.js { render :file => content_page, :layout => false }
+      format.xml { render :file => content_page, :layout => false }
+    end
   rescue CmsLiteExceptions::MissingTemplateError => ex
     render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
   end
