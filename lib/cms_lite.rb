@@ -1,5 +1,5 @@
 require 'cms_lite/exceptions'
-require 'cms_lite/initialize_routes'
+require 'fileutils'
 
 class CmsLite
   CONTENT_PATH = 'content'
@@ -55,8 +55,10 @@ class CmsLite
       translated_filename = get_translated_file(page_path, to, from)
       return if File.exist?(translated_filename) # don't overwrite existing files
       text = IO.read(page_path)
-      translated_text = translate(text, to, from)      
-      File.open(translated_filename, 'w') {|f| f.write(translated_text) }
+      translated_text = translate(text, to, from)
+      translated_directory = File.dirname(translated_filename)
+      FileUtils.mkdir_p(translated_directory)
+      File.open(translated_filename, 'w') { |f| f.write(translated_text) }
     end
     
     def get_translated_file(page, to, from)
@@ -68,6 +70,10 @@ class CmsLite
     
     # from: http://ruby.geraldbauer.ca/google-translation-api.html
     def translate(text, to, from = 'en')
+      require 'cgi'
+      require 'json'
+      require 'net/http'
+
       base = 'http://ajax.googleapis.com/ajax/services/language/translate' 
       # assemble query params
       params = {

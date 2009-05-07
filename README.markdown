@@ -9,22 +9,65 @@ and you're ready to go.
 
 Installation
 =================
-Install the gem:
 
-CMS Lite Requires a login method called 'login_required' that will be called in the event the user is not logged in and 
-attempts to load a protected page.
+Install the gem:
+------------------
+sudo gem install cms-lite
+
+
+Add the gem to environment.rb
+------------------
+config.gem 'cms-lite', :lib => 'cms_lite'
+
+
+Handy Rake Tasks
+------------------
+CMS Lite comes with rake tasks that can help you manage your project.  These include the ability to send all files from one language
+to google for translation into 24 other languages.  To gain access to these tasks simple add the following lines to Rakefile:
+
+  require 'cms_lite'
+  require 'cms_lite/tasks'
+  
+
+Run rake task:
+------------------
+  rake cms_lite:setup 
+
+then visit:
+  http://localhost:3000/cmslite/hello-world
+or 
+  http://localhost:3000/cmslite-protected/hello-world
+
+
+Translate your content with Google
+------------------
+  rake cms_lite:translate 
+  
+  Will translate all files in the 'en' directory into the following languages (codes):
+  ar bg ca cs da de el en es fr hi id it ja pt-PT sk sr sv vi zh-CN
+  
+  If you wish to translate from another language -ie your content files are in the es directory then you can do this:
+  rake cms_lite:translate -language=es
+
+Notes:
+------------------
+1. CMS Lite Requires a login method called 'login_required' that will be called in the event the user is not logged in and attempts to load a protected page.
+2. Don't mix directories it will mess up the routes.  ie if you have a directory named cmslite in pages don't create a directory called cmslite under protected-pages.
+   If you do Rails won't know which directory to route to.
+
 
 Routes:
 ------------------
- CMS Lite will add a route for each subdirectory found under /content/pages/en.
- 
- 
+ CMS Lite will add a route for each subdirectory found under /content/pages/en and /content/protected-pages/en.
+
 Example:
 - - -
-    Place test_me.html into /content/pages/en/cms/test_me.html
-    Visit
-    http: http://localhost:3000/cms/test_me
-      
+    Thus, a page found at:
+       /content/pages/en/example/my-page.htm 
+    becomes
+       http://localhost:3000/example/my-page
+
+
 The Basics
 =================
 The cms lite plugin provides basic template rendering functionality.  
@@ -38,13 +81,7 @@ Advanced Stuff
 The CMS Lite engine can display localization content.  To add spanish simply add an 'es' directory next to the 'en' directory
 and then copy your content pages to that directory.
 
-Handy Rake Tasks
-------------------
-CMS Lite comes with rake tasks that can help you manage your project.  These include the ability to send all files from one language
-to google for translation into 24 other languages.  To gain access to these tasks simple add the following lines to Rakefile:
 
-  require 'cms_lite'
-  require 'cms_lite/tasks'
 
 
 Copyright (c) 2009 Justin Ball, released under the MIT license

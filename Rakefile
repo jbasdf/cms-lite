@@ -25,13 +25,14 @@ end
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
-    gemspec.name = "cms_lite"
+    gemspec.name = "cms-lite"
     gemspec.summary = "Simple CMS system"
     gemspec.email = "justinball@gmail.com"
     gemspec.homepage = "http://github.com/jbasdf/cms_lite"
     gemspec.description = "CMS gem that makes it simple to interact with your content developers by serving pages from '/content'."
     gemspec.authors = ["Justin Ball"]
     gemspec.files.include %w( tasks/rails.rake lib/cms_lite/*.rb )
+    gemspec.rubyforge_project = 'cms-lite'    
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
