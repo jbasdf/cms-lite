@@ -3,15 +3,15 @@ class CmsLiteController < ApplicationController
   before_filter :login_required, :only => [:show_protected_page]
 
   def show_page
-    render_content_page(CmsLite::CMS_LITE_PAGES_PATH)
+    render_content_page(CmsLite::PAGES_PATH)
   end
   
   def show_protected_page
-    render_content_page(CmsLite::CMS_LITE_PROTECTED_PAGES_PATH)
+    render_content_page(CmsLite::PROTECTED_PAGES_PATH)
   end
   
   def render_content_page(cms_lite_path, request_layout = '')
-    path = File.join(RAILS_ROOT, CmsLite::CMS_LITE_CONTENT_PATH, cms_lite_path, I18n.locale.to_s, params[:content_key], params[:content_page].join('/'))
+    path = File.join(RAILS_ROOT, CmsLite::CONTENT_PATH, cms_lite_path, I18n.locale.to_s, params[:content_key], params[:content_page].join('/'))
     format = params[:format] || 'htm'
     content_page = Dir.glob("/#{path}.#{format}").first
     content_page = Dir.glob("/#{path}").first  if content_page.nil?
