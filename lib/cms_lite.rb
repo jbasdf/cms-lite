@@ -1,11 +1,11 @@
 require 'cms_lite/exceptions'
+require 'cms_lite/languages'
 require 'fileutils'
 
 class CmsLite
   CONTENT_PATH = 'content'
   PAGES_PATH = 'pages'
   PROTECTED_PAGES_PATH = 'protected-pages'
-  LANGUAGES = %W{ar bg ca cs da de el en es fr hi id it ja pt-PT sk sr sv vi zh-CN} 
   
   class << self
     
@@ -43,7 +43,7 @@ class CmsLite
         if File.directory?(next_file)
           translate_and_write_pages(next_file, language)
         else
-          LANGUAGES.each do |to|
+          GoogleTranslate::LANGUAGES.each do |to|
             translate_and_write_page(next_file, to, language)
           end
         end
@@ -51,6 +51,7 @@ class CmsLite
     end
     
     def translate_and_write_page(page_path, to, from)
+      return if to == from
       return unless File.exist?(page_path)
       translated_filename = get_translated_file(page_path, to, from)
       return if File.exist?(translated_filename) # don't overwrite existing files
@@ -70,6 +71,9 @@ class CmsLite
     
     # from: http://ruby.geraldbauer.ca/google-translation-api.html
     def translate(text, to, from = 'en')
+      
+      return if to == from
+      
       require 'cgi'
       require 'json'
       require 'net/http'
@@ -88,6 +92,9 @@ class CmsLite
       if json['responseStatus'] == 200
         json['responseData']['translatedText']
       else
+        puts response
+        puts to
+        puts from
         raise StandardError, response['responseDetails']
       end
     end

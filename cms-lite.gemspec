@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Justin Ball"]
-  s.date = %q{2009-05-07}
+  s.date = %q{2009-05-08}
   s.description = %q{CMS gem that makes it simple to interact with your content developers by serving pages from '/content'.}
   s.email = %q{justinball@gmail.com}
   s.extra_rdoc_files = [
@@ -20,13 +20,13 @@ Gem::Specification.new do |s|
      "VERSION",
      "app/controllers/cms_lite_controller.rb",
      "cms-lite.gemspec",
-     "cms_lite.gemspec",
      "config/cms_lite_routes.rb",
      "lib/cms_lite.rb",
      "lib/cms_lite/exceptions.rb",
      "lib/cms_lite/exceptions.rb",
      "lib/cms_lite/initialize_routes.rb",
      "lib/cms_lite/initialize_routes.rb",
+     "lib/cms_lite/languages.rb",
      "lib/cms_lite/tasks.rb",
      "lib/cms_lite/tasks.rb",
      "pkg/cms-lite-0.2.7.gem",
