@@ -29,6 +29,7 @@ class CmsLiteController < ApplicationController
   
   def choose_layout(content_key)
     layout = CmsLite.cms_layouts[content_key]
+    layout = CmsLite.cms_layouts[:default] if layout.blank?
     layout ||= 'application'
   end
   

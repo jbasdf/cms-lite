@@ -60,10 +60,11 @@ Layouts:
 By default cms lite will look for a layout named 'application' and use that to render all pages.  You can override that behavior with an initializer.
 Add a file to config/initializers and name it cms_lite.rb.  Add the following line to that file:
 
-CmsLite.cms_layouts = { '/cms' => 'cms_template_', '/help' => 'help' }_
+CmsLite.cms_layouts = { '/cms' => 'cms_template_', '/help' => 'help', :default => 'default'}
 
 The line above will tell cms lite to render the 'cms_template' for any file located under '/content/pages/en/cms' and will also use the 'help' layout
-for any pages located under '/content/pages/en/help'.  Modify the configuration to meet your needs.
+for any pages located under '/content/pages/en/help'.  You can specify a default template to be use when no other template is specified by adding
+:default => 'template name'.  Modify the configuration to meet your needs.
 
 
 Routes:

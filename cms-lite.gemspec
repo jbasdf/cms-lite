@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cms-lite}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Justin Ball"]
@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
      "lib/cms_lite/tasks.rb",
      "lib/cms_lite/tasks.rb",
      "pkg/cms-lite-0.2.7.gem",
+     "pkg/cms-lite-0.3.0.gem",
      "rails/init.rb",
      "tasks/rails.rake",
      "tasks/rails.rake",
