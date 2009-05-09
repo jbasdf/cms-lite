@@ -18,13 +18,18 @@ class CmsLiteController < ApplicationController
     content_page = Dir.glob("/#{path}.*").first  if content_page.nil?
     raise CmsLite::Exceptions::MissingTemplateError, "Could not find template for: '#{path}'" if content_page.nil?
     respond_to do |format|
-      format.html { render :file => content_page }
+      format.html { render :file => content_page, :layout =>  choose_layout(params[:content_key]) }
       format.js { render :file => content_page, :layout => false }
       format.xml { render :file => content_page, :layout => false }
     end
   rescue CmsLite::Exceptions::MissingTemplateError => ex
     
     render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+  end
+  
+  def choose_layout(content_key)
+    layout = CmsLite.cms_layouts[content_key]
+    layout ||= 'application'
   end
   
 end

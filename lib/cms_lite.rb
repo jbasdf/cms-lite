@@ -9,6 +9,14 @@ class CmsLite
   
   class << self
     
+    def cms_layouts=(layouts)
+      @@layouts = layouts
+    end
+    
+    def cms_layouts
+      @@layouts
+    end
+    
     def cms_routes
       get_cms_routes(PAGES_PATH)
     end
@@ -25,8 +33,13 @@ class CmsLite
           Dir.glob("#{localization_directory}/*").each do |content_item|
             path = File.basename(content_item)
             content_key = content_item.gsub(localization_directory, '')
-            cms_routes << { :uri => "/#{path}/*content_page",
+            if !content_key.blank?
+              cms_route = { :uri => "/#{path}/*content_page",
                             :content_key => content_key }
+              if !cms_routes.include?(cms_route)
+                cms_routes << cms_route
+              end
+            end
           end
         end
       end

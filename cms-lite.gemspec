@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
      "lib/cms_lite/initialize_routes.rb",
      "lib/cms_lite/initialize_routes.rb",
      "lib/cms_lite/languages.rb",
+     "lib/cms_lite/languages.rb",
      "lib/cms_lite/tasks.rb",
      "lib/cms_lite/tasks.rb",
      "pkg/cms-lite-0.2.7.gem",
