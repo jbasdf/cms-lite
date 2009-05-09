@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
      "lib/cms_lite/tasks.rb",
      "pkg/cms-lite-0.2.7.gem",
      "pkg/cms-lite-0.3.0.gem",
+     "pkg/cms-lite-0.3.1.gem",
      "rails/init.rb",
      "tasks/rails.rake",
      "tasks/rails.rake",
