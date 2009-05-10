@@ -1,5 +1,6 @@
 class CmsLiteController < ApplicationController
-
+  unloadable
+  
   before_filter :login_required, :only => [:show_protected_page]
 
   def show_page
