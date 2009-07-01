@@ -105,10 +105,7 @@ class CmsLite
       if json['responseStatus'] == 200
         json['responseData']['translatedText']
       else
-        puts response
-        puts to
-        puts from
-        raise StandardError, response['responseDetails']
+        puts "A problem occured while translating from #{from} to #{to}. Response: #{response}"
       end
     end
     
