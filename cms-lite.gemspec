@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cms-lite}
-  s.version = "0.3.3"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Justin Ball"]
@@ -264,12 +264,15 @@ Gem::Specification.new do |s|
      "test/rails_root/test/test_helper.rb",
      "test/rails_root/test/unit/.keep",
      "test/rails_root/test/unit/cms_lite_test.rb",
+     "test/rails_root/themes/blue/content/pages/en/blue/blue.html.erb",
+     "test/rails_root/themes/blue/content/pages/en/open/blue.html.erb",
      "test/rails_root/themes/blue/description.txt",
      "test/rails_root/themes/blue/locales/en.yml",
      "test/rails_root/themes/blue/views/layouts/default.html.erb",
      "test/rails_root/themes/blue/views/layouts/global/_footer.html.erb",
      "test/rails_root/themes/blue/views/layouts/global/_head.html.erb",
      "test/rails_root/themes/blue/views/layouts/global/_header.html.erb",
+     "test/rails_root/themes/red/content/protected-pages/en/red/red.html.erb",
      "test/rails_root/themes/red/description.txt",
      "test/rails_root/themes/red/locales/en.yml",
      "test/rails_root/themes/red/views/layouts/default.html.erb",
