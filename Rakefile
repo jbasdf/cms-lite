@@ -8,9 +8,25 @@ task :default => :test
 desc 'Test the cms_lite plugin.'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
+  t.libs << 'test/rails_root/test'
+  t.pattern = 'test/rails_root/test/**/*_test.rb'
   t.verbose = true
+end
+
+begin
+  require 'rcov/rcovtask'
+  Rcov::RcovTask.new do |t|
+    #t.libs << 'lib'
+    t.libs << 'test/rails_root/lib'
+    t.pattern = 'test/rails_root/test/**/*_test.rb'
+    t.verbose = true
+    t.output_dir = 'coverage'
+    t.rcov_opts << '--exclude "gems/*"'
+  end
+rescue LoadError
+  task :rcov do
+    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
+  end
 end
 
 desc 'Generate documentation for the cms_lite plugin.'
@@ -32,7 +48,8 @@ begin
     gemspec.description = "CMS gem that makes it simple to interact with your content developers by serving pages from '/content'."
     gemspec.authors = ["Justin Ball"]
     gemspec.files.include %w( tasks/rails.rake lib/cms_lite/*.rb )
-    gemspec.rubyforge_project = 'cms-lite'    
+    gemspec.rubyforge_project = 'cms-lite' 
+    gemspec.add_dependency "babelphish"
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"

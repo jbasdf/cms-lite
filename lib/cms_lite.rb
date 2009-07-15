@@ -1,6 +1,7 @@
 require 'cms_lite/exceptions'
 require 'cms_lite/languages'
 require 'fileutils'
+require 'babelphish'
 
 class CmsLite
   CONTENT_PATH = 'content'
@@ -18,16 +19,16 @@ class CmsLite
     end
     
     def cms_routes
-      get_cms_routes(PAGES_PATH)
+      get_cms_routes(CONTENT_PATH, PAGES_PATH)
     end
     
     def protected_cms_routes
-      get_cms_routes(PROTECTED_PAGES_PATH)
+      get_cms_routes(CONTENT_PATH, PROTECTED_PAGES_PATH)
     end
     
-    def get_cms_routes(pages_path)
+    def get_cms_routes(content_path, pages_path)
       cms_routes = []
-      cms_lite_page_path = File.join(RAILS_ROOT, CONTENT_PATH, pages_path)
+      cms_lite_page_path = File.join(RAILS_ROOT, content_path, pages_path)
       Dir.glob("#{cms_lite_page_path}/*").each do |localization_directory|
         if File.directory?(localization_directory)
           Dir.glob("#{localization_directory}/*").each do |content_item|
@@ -46,6 +47,37 @@ class CmsLite
       cms_routes
     end
     
+    def content_paths
+      @@content_paths ||= [CONTENT_PATH]
+    end
+    
+    def append_content_path(path)
+      @@content_paths << path
+    end
+    
+    def prepend_content_path(path)
+      @@content_paths.unshift(path)
+    end
+    
+    def remove_content_path(path)
+      content_paths.delete(path)
+    end
+    
+    # This is a utitility method that makes sure the unprotected routes don't interfere with the proctected routes
+    def check_routes
+      bad_routes = []
+      open_routes = cms_routes
+      protected_routes = protected_cms_routes
+      open_routes.each do |open_route|
+        protected_routes.each do |protected_route|
+          if open_route[:content_key] == protected_route[:content_key]
+            bad_routes << open_route
+          end
+        end
+      end
+      bad_routes
+    end
+        
     def translate_pages(language = 'en')
       translate_and_write_pages(File.join(RAILS_ROOT, CONTENT_PATH, PAGES_PATH, language), language)
       translate_and_write_pages(File.join(RAILS_ROOT, CONTENT_PATH, PROTECTED_PAGES_PATH, language), language)
@@ -69,7 +101,7 @@ class CmsLite
       translated_filename = get_translated_file(page_path, to, from)
       return if File.exist?(translated_filename) # don't overwrite existing files
       text = IO.read(page_path)
-      translated_text = translate(text, to, from)
+      translated_text = Babelphish::Translator.translate(text, to, from)
       translated_directory = File.dirname(translated_filename)
       FileUtils.mkdir_p(translated_directory)
       File.open(translated_filename, 'w') { |f| f.write(translated_text) }
@@ -81,33 +113,6 @@ class CmsLite
       segments[index] = to
       segments.join('/')
     end
-    
-    # from: http://ruby.geraldbauer.ca/google-translation-api.html
-    def translate(text, to, from = 'en')
-      
-      return if to == from
-      
-      require 'cgi'
-      require 'json'
-      require 'net/http'
 
-      base = 'http://ajax.googleapis.com/ajax/services/language/translate' 
-      # assemble query params
-      params = {
-        :langpair => "#{from}|#{to}", 
-        :q => text,
-        :v => 1.0  
-      }
-      query = params.map{ |k,v| "#{k}=#{CGI.escape(v.to_s)}" }.join('&')
-      # send get request
-      response = Net::HTTP.get_response( URI.parse( "#{base}?#{query}" ) )
-      json = JSON.parse( response.body )
-      if json['responseStatus'] == 200
-        json['responseData']['translatedText']
-      else
-        puts "A problem occured while translating from #{from} to #{to}. Response: #{response}"
-      end
-    end
-    
   end
 end

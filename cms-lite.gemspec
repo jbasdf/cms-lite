@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Justin Ball"]
-  s.date = %q{2009-06-09}
+  s.date = %q{2009-07-13}
   s.description = %q{CMS gem that makes it simple to interact with your content developers by serving pages from '/content'.}
   s.email = %q{justinball@gmail.com}
   s.extra_rdoc_files = [
@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".gemspec",
+     ".gitignore",
      "MIT-LICENSE",
      "README.markdown",
      "Rakefile",
@@ -33,8 +34,6 @@ Gem::Specification.new do |s|
      "rails/init.rb",
      "tasks/rails.rake",
      "tasks/rails.rake",
-     "test/cms_lite_test.rb",
-     "test/test_helper.rb",
      "uninstall.rb"
   ]
   s.has_rdoc = true
@@ -45,8 +44,32 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{Simple CMS system}
   s.test_files = [
-    "test/cms_lite_test.rb",
-     "test/test_helper.rb"
+    "test/rails_root/app/controllers/application_controller.rb",
+     "test/rails_root/config/boot.rb",
+     "test/rails_root/config/environment.rb",
+     "test/rails_root/config/environments/development.rb",
+     "test/rails_root/config/environments/production.rb",
+     "test/rails_root/config/environments/test.rb",
+     "test/rails_root/config/initializers/cms_lite.rb",
+     "test/rails_root/config/initializers/inflections.rb",
+     "test/rails_root/config/initializers/mime_types.rb",
+     "test/rails_root/config/initializers/requires.rb",
+     "test/rails_root/config/initializers/session_store.rb",
+     "test/rails_root/config/routes.rb",
+     "test/rails_root/db/schema.rb",
+     "test/rails_root/features/step_definitions/cms_steps.rb",
+     "test/rails_root/features/step_definitions/webrat_steps.rb",
+     "test/rails_root/features/support/env.rb",
+     "test/rails_root/public/dispatch.rb",
+     "test/rails_root/script/create_project.rb",
+     "test/rails_root/test/shoulda_macros/controller.rb",
+     "test/rails_root/test/test_helper.rb",
+     "test/rails_root/vendor/plugins/ssl_requirement/lib/ssl_requirement.rb",
+     "test/rails_root/vendor/plugins/ssl_requirement/test/ssl_requirement_test.rb",
+     "test/rails_root/vendor/plugins/validation_reflection/init.rb",
+     "test/rails_root/vendor/plugins/validation_reflection/lib/boiler_plate/validation_reflection.rb",
+     "test/rails_root/vendor/plugins/validation_reflection/test/test_helper.rb",
+     "test/rails_root/vendor/plugins/validation_reflection/test/validation_reflection_test.rb"
   ]
 
   if s.respond_to? :specification_version then
@@ -54,8 +77,11 @@ Gem::Specification.new do |s|
     s.specification_version = 2
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<babelphish>, [">= 0"])
     else
+      s.add_dependency(%q<babelphish>, [">= 0"])
     end
   else
+    s.add_dependency(%q<babelphish>, [">= 0"])
   end
 end
