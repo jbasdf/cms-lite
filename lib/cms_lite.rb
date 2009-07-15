@@ -19,11 +19,19 @@ class CmsLite
     end
     
     def cms_routes
-      get_cms_routes(CONTENT_PATH, PAGES_PATH)
+      get_all_content_path_routes(PAGES_PATH)
     end
     
     def protected_cms_routes
-      get_cms_routes(CONTENT_PATH, PROTECTED_PAGES_PATH)
+      get_all_content_path_routes(PROTECTED_PAGES_PATH)
+    end
+    
+    def get_all_content_path_routes(pages_path)
+      routes = []
+      content_paths.each do |path|
+        routes += get_cms_routes(path, pages_path)
+      end
+      routes
     end
     
     def get_cms_routes(content_path, pages_path)
@@ -51,16 +59,19 @@ class CmsLite
       @@content_paths ||= [CONTENT_PATH]
     end
     
-    def append_content_path(path)
-      @@content_paths << path
+    def append_content_path(path, reload_routes = true)
+      content_paths << path
+      ActionController::Routing::Routes.reload! if reload_routes
     end
     
-    def prepend_content_path(path)
-      @@content_paths.unshift(path)
+    def prepend_content_path(path, reload_routes = true)
+      content_paths.unshift(path)
+      ActionController::Routing::Routes.reload! if reload_routes
     end
     
-    def remove_content_path(path)
+    def remove_content_path(path, reload_routes = true)
       content_paths.delete(path)
+      ActionController::Routing::Routes.reload! if reload_routes
     end
     
     # This is a utitility method that makes sure the unprotected routes don't interfere with the proctected routes
