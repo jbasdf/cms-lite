@@ -61,17 +61,24 @@ class CmsLite
     
     def append_content_path(path, reload_routes = true)
       content_paths << path
-      ActionController::Routing::Routes.reload! if reload_routes
+      setup_routes if reload_routes
     end
     
     def prepend_content_path(path, reload_routes = true)
       content_paths.unshift(path)
-      ActionController::Routing::Routes.reload! if reload_routes
+      setup_routes if reload_routes
     end
     
     def remove_content_path(path, reload_routes = true)
       content_paths.delete(path)
-      ActionController::Routing::Routes.reload! if reload_routes
+      setup_routes if reload_routes
+    end
+    
+    def setup_routes
+      # HACK for some reason the app routes disappear when doing a reload.  Have to add them back here so they are the first to get loaded
+      app_routes = File.join(RAILS_ROOT, *%w[config routes.rb])
+      ActionController::Routing::Routes.add_configuration_file(app_routes)
+      ActionController::Routing::Routes.reload
     end
     
     # This is a utitility method that makes sure the unprotected routes don't interfere with the proctected routes
