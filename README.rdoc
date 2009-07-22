@@ -15,7 +15,6 @@ and you're ready to go.
 === Add the gem to environment.rb
   config.gem 'cms-lite', :lib => 'cms_lite'
 
-
 === Handy Rake Tasks
 CMS Lite comes with rake tasks that can help you manage your project.  These include the ability to send all files from one language
 to google for translation into 24 other languages.  To gain access to these tasks simple add the following lines to Rakefile:
@@ -32,8 +31,18 @@ then visit:
 or 
   http://localhost:3000/cmslite-protected/hello-world
 
+== Usage
+To have a page with the url 'http://www.example.com/blue/home' create a page '/content/pages/en/blue/home.html.erb
+To create a page that requires a login at the url 'http://www.example.com/red/protected' create a page '/content/protected-page/en/red/protected.html.erb'
 
-=== Translate your content with Google
+If you want a page mapped directly off the root ie http://www.example.com/wow create a directory called default and put the file there.
+ie 'content/pages/en/default/wow.html.erb'
+
+You can add new 'content' paths by calling append_content_path:
+  CmsLite.append_content_path("somewhere/else/content")
+This let's you add pages like 'somewhere/else/content/en/green/home.html.erb' and find them at http://www.example.com/green/home
+
+== Translate your content with Google
   rake cms_lite:translate 
   
   Will translate all files in the 'en' directory into the following languages (codes):

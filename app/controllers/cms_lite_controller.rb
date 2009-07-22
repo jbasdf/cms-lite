@@ -14,7 +14,8 @@ class CmsLiteController < ApplicationController
   def render_content_page(cms_lite_path, request_layout = '')
     content_page = nil
     CmsLite.content_paths.each do |content_path|
-      path = File.join(RAILS_ROOT, content_path, cms_lite_path, I18n.locale.to_s, params[:content_key], params[:content_page].join('/'))
+      content_page_key = params[:content_page].is_a?(Array) ? params[:content_page].join('/') : params[:content_page]
+      path = File.join(RAILS_ROOT, content_path, cms_lite_path, I18n.locale.to_s, params[:content_key], content_page_key)
       format = params[:format] || 'htm'
       content_page = Dir.glob("#{path}.#{format}").first
       content_page = Dir.glob("#{path}").first  if content_page.nil?

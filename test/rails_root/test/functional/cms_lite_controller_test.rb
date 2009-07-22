@@ -12,6 +12,13 @@ class CmsLiteControllerTest < ActionController::TestCase
       should_respond_with :success
     end
     
+    context "unprotected root pages" do
+      setup do
+        get :show_page, :content_key => '/default', :content_page => 'root'
+      end
+      should_respond_with :success
+    end
+    
     context "protected pages"do
       context "not logged in" do
         setup do

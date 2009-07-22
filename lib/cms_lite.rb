@@ -7,6 +7,7 @@ class CmsLite
   CONTENT_PATH = 'content'
   PAGES_PATH = 'pages'
   PROTECTED_PAGES_PATH = 'protected-pages'
+  ROOT_PATH = 'default' # pages located in this directory will be served off the root of the website. ie http://www.example.com/my-page
   
   class << self
     
@@ -43,16 +44,35 @@ class CmsLite
             path = File.basename(content_item)
             content_key = content_item.gsub(localization_directory, '')
             if !content_key.blank?
-              cms_route = { :uri => "/#{path}/*content_page",
-                            :content_key => content_key }
-              if !cms_routes.include?(cms_route)
-                cms_routes << cms_route
+              # pages found in the root path get root mapping
+              if path == ROOT_PATH
+                Dir.glob("#{content_item}/*").each do |root_page|
+                  root_page_key = File.basename(File.basename(root_page, ".*"), ".*") # for files that look like root.html.erb
+                  cms_route = { :uri => "/#{root_page_key}",
+                                :content_page => "#{root_page_key}",
+                                :content_key => content_key }
+                  if !cms_routes.include?(cms_route)
+                    cms_routes << cms_route
+                  end
+                end
+              else
+                cms_route = { :uri => "/#{path}/*content_page",
+                              :content_key => content_key }
+                if !cms_routes.include?(cms_route)
+                  cms_routes << cms_route
+                end
               end
             end
           end
         end
       end
       cms_routes
+    end
+    
+    def build_route_options(action, cms_route)
+      options = { :controller => 'cms_lite', :action => action, :content_key => cms_route[:content_key] }
+      options = options.merge(:content_page => cms_route[:content_page]) if cms_route[:content_page]
+      options
     end
     
     def content_paths

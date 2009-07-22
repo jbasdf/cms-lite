@@ -2,6 +2,7 @@ $:.reject! { |e| e.include? 'TextMate' }
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
+require 'ruby-debug'
 gem 'thoughtbot-factory_girl' # from github
 require 'factory_girl'
 require 'mocha'
@@ -35,4 +36,10 @@ class ActiveSupport::TestCase
   def ensure_flash(val)
     assert_contains flash.values, val, ", Flash: #{flash.inspect}"
   end
+  
+  # For Selenium
+  # setup do |session|
+  #   session.host! "localhost:3001"
+  # end
+    
 end
