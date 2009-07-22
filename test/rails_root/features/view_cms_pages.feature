@@ -16,13 +16,13 @@ Scenario: Anonymous user visits root public page
   Then I should see "hello from the root"
   
 Scenario: Anonymous user visits public cms lite page in blue theme
-  Given cms lite file "themes/blue/content/pages/en/open/blue.html.erb" contains "blue world"
+  Given cms lite file "themes/blue/content/pages/en/open/blue.htm" contains "blue world"
   And I am not logged in
   When I go to "/open/blue"
   Then I should see "blue world"
 
 Scenario: Anonymous user visits public root page in blue theme
-  Given cms lite file "themes/blue/content/pages/en/default/blue_root.html.erb" contains "blue root"
+  Given cms lite file "themes/blue/content/pages/en/default/blue_root.html" contains "blue root"
   And I am not logged in
   When I go to "/blue_root"
   Then I should see "blue root"
