@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cms-lite}
-  s.version = "0.5.1"
+  s.version = "0.5.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Justin Ball"]
-  s.date = %q{2009-07-24}
+  s.date = %q{2009-08-08}
   s.description = %q{CMS gem that makes it simple to interact with your content developers by serving pages from '/content'.}
   s.email = %q{justinball@gmail.com}
   s.extra_rdoc_files = [
