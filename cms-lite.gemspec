@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Justin Ball"]
-  s.date = %q{2009-10-27}
+  s.date = %q{2009-10-29}
   s.description = %q{CMS gem that makes it simple to interact with your content developers by serving pages from '/content'.}
   s.email = %q{justinball@gmail.com}
   s.extra_rdoc_files = [
@@ -287,15 +287,6 @@ Gem::Specification.new do |s|
      "test/rails_root/vendor/plugins/ssl_requirement/README",
      "test/rails_root/vendor/plugins/ssl_requirement/lib/ssl_requirement.rb",
      "test/rails_root/vendor/plugins/ssl_requirement/test/ssl_requirement_test.rb",
-     "test/rails_root/vendor/plugins/validation_reflection/CHANGELOG",
-     "test/rails_root/vendor/plugins/validation_reflection/LICENSE",
-     "test/rails_root/vendor/plugins/validation_reflection/README",
-     "test/rails_root/vendor/plugins/validation_reflection/Rakefile",
-     "test/rails_root/vendor/plugins/validation_reflection/about.yml",
-     "test/rails_root/vendor/plugins/validation_reflection/init.rb",
-     "test/rails_root/vendor/plugins/validation_reflection/lib/boiler_plate/validation_reflection.rb",
-     "test/rails_root/vendor/plugins/validation_reflection/test/test_helper.rb",
-     "test/rails_root/vendor/plugins/validation_reflection/test/validation_reflection_test.rb",
      "uninstall.rb"
   ]
   s.homepage = %q{http://github.com/jbasdf/cms_lite}
@@ -339,11 +330,7 @@ Gem::Specification.new do |s|
      "test/rails_root/test/test_helper.rb",
      "test/rails_root/test/unit/cms_lite_test.rb",
      "test/rails_root/vendor/plugins/ssl_requirement/lib/ssl_requirement.rb",
-     "test/rails_root/vendor/plugins/ssl_requirement/test/ssl_requirement_test.rb",
-     "test/rails_root/vendor/plugins/validation_reflection/init.rb",
-     "test/rails_root/vendor/plugins/validation_reflection/lib/boiler_plate/validation_reflection.rb",
-     "test/rails_root/vendor/plugins/validation_reflection/test/test_helper.rb",
-     "test/rails_root/vendor/plugins/validation_reflection/test/validation_reflection_test.rb"
+     "test/rails_root/vendor/plugins/ssl_requirement/test/ssl_requirement_test.rb"
   ]
 
   if s.respond_to? :specification_version then
