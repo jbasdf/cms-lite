@@ -15,7 +15,7 @@ class CmsLiteController < ApplicationController
     content_page = nil
     CmsLite.content_paths.each do |content_path|
       content_page_key = params[:content_page].is_a?(Array) ? params[:content_page].join('/') : params[:content_page]
-      path = File.join(RAILS_ROOT, content_path, cms_lite_path, I18n.locale.to_s, params[:content_key], content_page_key)
+      path = File.join(::Rails.root.to_s, content_path, cms_lite_path, I18n.locale.to_s, params[:content_key], content_page_key)
       format = params[:format] || 'htm'
       content_page = Dir.glob("#{path}.#{format}").first
       content_page = Dir.glob("#{path}").first  if content_page.nil?
@@ -29,7 +29,7 @@ class CmsLiteController < ApplicationController
       format.xml { render :file => content_page, :layout => false }
     end
   rescue CmsLite::Exceptions::MissingTemplateError => ex
-    render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
+    render :file => "#{::Rails.root.to_s}/public/404.html", :status => 404
   end
   
   def choose_layout(content_key)

@@ -1,0 +1,29 @@
+source "http://rubygems.org"
+
+gem "rails", "3.0.0"
+gem "capybara", ">= 0.3.9"
+gem 'mysql'
+
+gem 'authlogic'
+gem 'disguise'
+gem "bcrypt-ruby", :require => "bcrypt"
+gem 'will_paginate'
+gem "cms-lite", :path => '../../'
+
+gem 'muck-engine'
+gem 'muck-users'
+
+if RUBY_VERSION < '1.9'
+  gem "ruby-debug"
+end
+
+group :test do
+  gem 'shoulda'
+  gem 'factory_girl'
+  gem 'mocha'
+  gem 'redgreen'
+  gem 'cucumber'
+  gem 'webrat'
+  gem 'rspec'
+  gem 'rspec-rails'
+end

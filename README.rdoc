@@ -17,13 +17,9 @@ and you're ready to go.
 
 === Handy Rake Tasks
 CMS Lite comes with rake tasks that can help you manage your project.  These include the ability to send all files from one language
-to google for translation into 24 other languages.  To gain access to these tasks simple add the following lines to Rakefile:
-
-  require 'cms_lite'
-  require 'cms_lite/tasks'
+to google for translation into 24 other languages.
   
-
-=== Run rake task:
+Run rake task:
   rake cms_lite:setup 
 
 then visit:
@@ -92,4 +88,4 @@ and then copy your content pages to that directory.
 
 
 
-Copyright (c) 2009 Justin Ball, released under the MIT license
+Copyright (c) 2009-2010 Justin Ball, released under the MIT license

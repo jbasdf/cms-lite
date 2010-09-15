@@ -1,0 +1,17 @@
+development:
+  adapter: mysql
+  database: cms_lite_development
+  username: root
+  password:
+  host: localhost
+  encoding: utf8
+
+test: &TEST
+  adapter: mysql
+  database: cms_lite_test
+  username: root
+  password:
+  host: localhost
+  encoding: utf8
+cucumber:
+  <<: *TEST
