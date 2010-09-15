@@ -54,19 +54,12 @@ module CmsLite
         cms_routes
       end
     
-      def build_route_options(action, cms_route)
-        options = { :controller => 'cms_lite', :action => action, :content_key => cms_route[:content_key] }
-        options = options.merge(:content_page => cms_route[:content_page]) if cms_route[:content_page]
-        options
+      def build_route_options(cms_route)
+        defaults = { :content_key => cms_route[:content_key] }
+        defaults = defaults.merge(:content_page => cms_route[:content_page]) if cms_route[:content_page]
+        defaults        
       end
-    
-      def setup_routes
-        # HACK for some reason the app routes disappear when doing a reload.  Have to add them back here so they are the first to get loaded
-        app_routes = File.join(::Rails.root.to_s, *%w[config routes.rb])
-        ActionController::Routing::Routes.add_configuration_file(app_routes)
-        ActionController::Routing::Routes.reload
-      end
-    
+        
       # This is a utitility method that makes sure the unprotected routes don't interfere with the proctected routes
       def check_routes
         bad_routes = []

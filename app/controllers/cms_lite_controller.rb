@@ -13,7 +13,7 @@ class CmsLiteController < ApplicationController
   
   def render_content_page(cms_lite_path, request_layout = '')
     content_page = nil
-    CmsLite.content_paths.each do |content_path|
+    CmsLite.configuration.content_paths.each do |content_path|
       content_page_key = params[:content_page].is_a?(Array) ? params[:content_page].join('/') : params[:content_page]
       path = File.join(::Rails.root.to_s, content_path, cms_lite_path, I18n.locale.to_s, params[:content_key], content_page_key)
       format = params[:format] || 'htm'
@@ -33,8 +33,8 @@ class CmsLiteController < ApplicationController
   end
   
   def choose_layout(content_key)
-    layout = CmsLite.cms_layouts[content_key]
-    layout = CmsLite.cms_layouts[:default] if layout.blank?
+    layout = CmsLite.configuration.cms_layouts[content_key]
+    layout = CmsLite.configuration.cms_layouts[:default] if layout.blank?
     layout ||= 'application'
   end
   

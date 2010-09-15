@@ -7,7 +7,7 @@ module CmsLite
       ActiveSupport.on_load(:action_controller) do
 
         if ENV["RAILS_ENV"] != "test"
-          bad_routes = CmsLite.check_routes
+          bad_routes = CmsLite::Resolver.check_routes
           if !bad_routes.empty?
             STDERR.puts "********************************************************"
             STDERR.puts "CMS LITE WARNING"

@@ -8,7 +8,7 @@ gem 'authlogic'
 gem 'disguise'
 gem "bcrypt-ruby", :require => "bcrypt"
 gem 'will_paginate'
-gem "cms-lite", :path => '../../'
+gem "cms-lite", :require => 'cms_lite', :path => '../../'
 
 gem 'muck-engine'
 gem 'muck-users'

@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
 
-  CmsLite.cms_routes.each do |cms_route|
-    map.connect cms_route[:uri], CmsLite.build_route_options('show_page', cms_route)
+  CmsLite::Resolver.cms_routes.each do |cms_route|
+    match cms_route[:uri] => "cms_lite#show_page", :defaults => CmsLite::Resolver.build_route_options(cms_route)
   end
   
-  CmsLite.protected_cms_routes.each do |cms_route|
-    map.connect cms_route[:uri], CmsLite.build_route_options('show_protected_page', cms_route)
+  CmsLite::Resolver.protected_cms_routes.each do |cms_route|
+    match cms_route[:uri] => "cms_lite#show_protected_page", :defaults => CmsLite::Resolver.build_route_options(cms_route)
   end
 
 end

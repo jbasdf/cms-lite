@@ -31,18 +31,25 @@ module CmsLite
   
     def append_content_path(path, reload_routes = true)
       content_paths << path
-      setup_routes if reload_routes
+      #setup_routes if reload_routes
     end
   
     def prepend_content_path(path, reload_routes = true)
       content_paths.unshift(path)
-      setup_routes if reload_routes
+      #setup_routes if reload_routes
     end
   
     def remove_content_path(path, reload_routes = true)
       content_paths.delete(path)
-      setup_routes if reload_routes
+      #setup_routes if reload_routes
     end
+    
+    # def setup_routes
+    #   # HACK for some reason the app routes disappear when doing a reload.  Have to add them back here so they are the first to get loaded
+    #   app_routes = File.join(::Rails.root.to_s, *%w[config routes.rb])
+    #   Rails.application.routes.add_configuration_file(app_routes)
+    #   Rails.application.routes.reload
+    # end
     
     def initialize
       self.cms_layouts = { :default => 'default' }
