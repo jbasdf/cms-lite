@@ -1,5 +1,9 @@
 module CmsLite
 
+  PAGES_PATH = 'pages'
+  PROTECTED_PAGES_PATH = 'protected-pages'
+  ROOT_PATH = 'default' # pages located in this directory will be served off the root of the website. ie http://www.example.com/my-page
+  
   def self.configuration
     # In case the user doesn't setup a configure block we can always return default settings:
     @configuration ||= Configuration.new

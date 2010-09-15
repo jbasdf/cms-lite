@@ -1,18 +1,15 @@
 module CmsLite
   
   class Resolver
-    PAGES_PATH = 'pages'
-    PROTECTED_PAGES_PATH = 'protected-pages'
-    ROOT_PATH = 'default' # pages located in this directory will be served off the root of the website. ie http://www.example.com/my-page
-  
+    
     class << self
     
       def cms_routes
-        get_all_content_path_routes(PAGES_PATH)
+        get_all_content_path_routes(CmsLite::PAGES_PATH)
       end
     
       def protected_cms_routes
-        get_all_content_path_routes(PROTECTED_PAGES_PATH)
+        get_all_content_path_routes(CmsLite::PROTECTED_PAGES_PATH)
       end
     
       def get_all_content_path_routes(pages_path)
@@ -83,42 +80,6 @@ module CmsLite
           end
         end
         bad_routes
-      end
-        
-      def translate_pages(language = 'en')
-        translate_and_write_pages(File.join(::Rails.root.to_s, CmsLite.configuration.content_path, PAGES_PATH, language), language)
-        translate_and_write_pages(File.join(::Rails.root.to_s, CmsLite.configuration.content_path, PROTECTED_PAGES_PATH, language), language)
-      end
-    
-      def translate_and_write_pages(path, language)
-        Dir.glob("#{path}/*").each do |next_file|
-          if File.directory?(next_file)
-            translate_and_write_pages(next_file, language)
-          else
-            CmsLite::GoogleTranslate::LANGUAGES.each do |to|
-              translate_and_write_page(next_file, to, language)
-            end
-          end
-        end
-      end
-    
-      def translate_and_write_page(page_path, to, from)
-        return if to == from
-        return unless File.exist?(page_path)
-        translated_filename = get_translated_file(page_path, to, from)
-        return if File.exist?(translated_filename) # don't overwrite existing files
-        text = IO.read(page_path)
-        translated_text = Babelphish::Translator.translate(text, to, from)
-        translated_directory = File.dirname(translated_filename)
-        FileUtils.mkdir_p(translated_directory)
-        File.open(translated_filename, 'w') { |f| f.write(translated_text) }
-      end
-    
-      def get_translated_file(page, to, from)
-        segments = page.split('/')
-        index = segments.index(from)
-        segments[index] = to
-        segments.join('/')
       end
   
     end

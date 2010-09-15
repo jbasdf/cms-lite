@@ -12,8 +12,8 @@ and you're ready to go.
   sudo gem install cms-lite
 
 
-=== Add the gem to environment.rb
-  config.gem 'cms-lite', :lib => 'cms_lite'
+=== Add the gem to Gemfile
+  gem 'cms-lite', :require => 'cms_lite'
 
 === Handy Rake Tasks
 CMS Lite comes with rake tasks that can help you manage your project.  These include the ability to send all files from one language
@@ -56,7 +56,9 @@ This let's you add pages like 'somewhere/else/content/en/green/home.html.erb' an
 By default cms lite will look for a layout named 'application' and use that to render all pages.  You can override that behavior with an initializer.
 Add a file to config/initializers and name it cms_lite.rb.  Add the following line to that file:
 
-  CmsLite.cms_layouts = { '/cms' => 'cms_template_', '/help' => 'help', :default => 'default'}
+  CmsLite.configure do |config|
+    config.cms_layouts = { '/cms' => 'cms_template_', '/help' => 'help', :default => 'default'}
+  end
 
 The line above will tell cms lite to render the 'cms_template' for any file located under '/content/pages/en/cms' and will also use the 'help' layout
 for any pages located under '/content/pages/en/help'.  You can specify a default template to be use when no other template is specified by adding

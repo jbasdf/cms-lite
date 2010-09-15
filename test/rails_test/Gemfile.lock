@@ -1,7 +1,7 @@
 PATH
   remote: /Users/jbasdf/projects/cms-lite
   specs:
-    cms-lite (0.5.7)
+    cms-lite (3.0.0)
       babelphish
 
 GEM
